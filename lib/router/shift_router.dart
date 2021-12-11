@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:exercise_mobile/shift/shift.dart';
-import 'package:exercise_mobile/shift/shift_detail_view.dart';
-import 'package:exercise_mobile/shift/shift_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +18,12 @@ class ShiftRouterDelegate extends RouterDelegate<RoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<RoutePath> {
   Shift? _selectedShift;
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  static ShiftRouterDelegate of(BuildContext context) {
+    final delegate = Router.of(context).routerDelegate;
+    assert(delegate is ShiftRouterDelegate, 'Delegate type must match');
+    return delegate as ShiftRouterDelegate;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -36,19 +40,21 @@ class ShiftRouterDelegate extends RouterDelegate<RoutePath>
         MaterialPage<void>(
           key: const ValueKey('ShiftListPage'),
           child: ShiftsPage(
-            tapShift: (Shift shift) {
-              _selectedShift = shift;
-              notifyListeners();
-            },
+            tapShift: tapShift,
           ),
         ),
         if (_selectedShift != null)
           MaterialPage<void>(
             key: ValueKey(_selectedShift),
-            child: ShiftDetailsPage(_selectedShift!),
+            child: ShiftDetailPage(_selectedShift!),
           )
       ],
     );
+  }
+
+  void tapShift(Shift shift) {
+    _selectedShift = shift;
+    notifyListeners();
   }
 
   @override
@@ -69,7 +75,8 @@ class ShiftRouterDelegate extends RouterDelegate<RoutePath>
 class ShiftRouteInformationParser extends RouteInformationParser<RoutePath> {
   @override
   Future<RoutePath> parseRouteInformation(
-      RouteInformation routeInformation) async {
+    RouteInformation routeInformation,
+  ) async {
     final uri = Uri.parse(routeInformation.location ?? '');
     if (uri.pathSegments.length == 2) {
       if (uri.pathSegments[0] == 'shift') {
@@ -83,9 +90,9 @@ class ShiftRouteInformationParser extends RouteInformationParser<RoutePath> {
   }
 
   @override
-  RouteInformation restoreRouteInformation(RoutePath path) {
-    if (path is ShiftRoutePath) {
-      return RouteInformation(location: '/shift/${path.shift.id}');
+  RouteInformation restoreRouteInformation(RoutePath configuration) {
+    if (configuration is ShiftRoutePath) {
+      return RouteInformation(location: '/shift/${configuration.shift.id}');
     }
     return const RouteInformation(location: '/');
   }

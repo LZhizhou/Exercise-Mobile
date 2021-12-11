@@ -78,12 +78,6 @@ Map<String, dynamic> _$ShiftToJson(Shift instance) => <String, dynamic>{
       'availableSlots': instance.availableSlots,
     };
 
-ShiftRepository _$ShiftRepositoryFromJson(Map<String, dynamic> json) =>
-    ShiftRepository();
-
-Map<String, dynamic> _$ShiftRepositoryToJson(ShiftRepository instance) =>
-    <String, dynamic>{};
-
 Contact _$ContactFromJson(Map<String, dynamic> json) => Contact(
       name: json['name'] as String,
       phone: json['phone'] as String,

@@ -1,25 +1,41 @@
+import 'package:collection/collection.dart';
+import 'package:exercise_mobile/shift/model/shift.dart';
 import 'package:exercise_mobile/tool.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'shift.dart';
-import 'package:collection/collection.dart';
-
+@immutable
 abstract class ShiftsState {
   const ShiftsState();
+  @override
+  bool operator ==(Object other) => other is ShiftsState;
+
+  @override
+  int get hashCode => 'ShiftsState'.hashCode;
 }
 
+@immutable
 class ShiftsInitial extends ShiftsState {
   const ShiftsInitial();
+  @override
+  bool operator ==(Object other) => other is ShiftsInitial;
+  @override
+  int get hashCode => 'ShiftsInitial'.hashCode;
 }
 
+@immutable
 class ShiftsLoading extends ShiftsState {
   const ShiftsLoading();
+  @override
+  bool operator ==(Object other) => other is ShiftsLoading;
+  @override
+  int get hashCode => 'ShiftsLoading'.hashCode;
 }
 
 @immutable
 class ShiftsLoaded extends ShiftsState {
-  final List<Shift> shifts;
   const ShiftsLoaded(this.shifts);
+  final List<Shift> shifts;
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30,12 +46,13 @@ class ShiftsLoaded extends ShiftsState {
         const DeepCollectionEquality.unordered().equals(shifts, other.shifts);
   }
 
-  Map<DateTime, List<Shift>>  groupFoldByDay() {
+  Map<DateTime, List<Shift>> groupFoldByDay() {
     return shifts
         // .where((element) => element.dtstart.compareTo(DateTime.now()) >= 0)
         .groupFoldBy<DateTime, List<Shift>>(
-            (Shift element) => element.dtstart.date,
-            (List<Shift>? previous, Shift element) => [...?previous, element]);
+      (Shift element) => element.dtstart.date,
+      (List<Shift>? previous, Shift element) => [...?previous, element],
+    );
   }
 
   @override
@@ -44,8 +61,8 @@ class ShiftsLoaded extends ShiftsState {
 
 @immutable
 class ShiftsError extends ShiftsState {
-  final String message;
   const ShiftsError(this.message);
+  final String message;
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

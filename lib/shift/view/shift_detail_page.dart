@@ -1,9 +1,9 @@
 import 'package:exercise_mobile/gen/assets.gen.dart';
-import 'package:exercise_mobile/shift/shift.dart';
+import 'package:exercise_mobile/shift/model/shift.dart';
 import 'package:flutter/material.dart';
 
-class ShiftDetailsPage extends StatelessWidget {
-  const ShiftDetailsPage(this._shift, {Key? key}) : super(key: key);
+class ShiftDetailPage extends StatelessWidget {
+  const ShiftDetailPage(this._shift, {Key? key}) : super(key: key);
   final Shift _shift;
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class ShiftDetailsPage extends StatelessWidget {
             indicatorColor: Colors.white,
             tabs: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8),
                 child: Text('PROFESSIONALS'),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8),
                 child: Text('SHIFT'),
               ),
             ],
@@ -57,8 +57,8 @@ class ShiftTab extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.calendar_today),
-          title: Text('Date'),
+          leading: const Icon(Icons.calendar_today),
+          title: const Text('Date'),
           subtitle: Text(_shift.date),
         ),
         ListTile(
@@ -101,7 +101,8 @@ class ShiftTab extends StatelessWidget {
           leading: const Icon(Icons.warning_amber),
           title: const Text('Requirements'),
           subtitle: Text(
-              _shift.additionalRequirements.map((e) => ' • $e').join('\n')),
+            _shift.additionalRequirements.map((e) => ' • $e').join('\n'),
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.text_snippet),

@@ -3,5 +3,17 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "shiftAppBarTitle": "Shifts",
+    "@shiftAppBarTitle": {
+        "description": "Text shown in the AppBar of the Shifts Page"
+    },
+    "professionalsTabName": "PROFESSIONALS",
+    "@professionalsTabName": {
+        "description": "Text shown in the professionals Tab of Shifts Detail Page"
+    },
+    "shiftTabName": "SHIFT",
+    "@shiftTabName": {
+        "description": "Text shown in the shift Tab of Shifts Detail Page"
     }
 }

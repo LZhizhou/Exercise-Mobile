@@ -5,13 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:exercise_mobile/counter/counter.dart';
-import 'package:exercise_mobile/l10n/l10n.dart';
 import 'package:exercise_mobile/router/shift_router.dart';
-import 'package:exercise_mobile/shift/shift_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

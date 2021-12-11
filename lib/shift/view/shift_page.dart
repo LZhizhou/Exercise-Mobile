@@ -1,6 +1,7 @@
+import 'package:exercise_mobile/l10n/l10n.dart';
+import 'package:exercise_mobile/router/shift_router.dart';
+import 'package:exercise_mobile/shift/model/shift_state.dart';
 import 'package:exercise_mobile/shift/shift.dart';
-import 'package:exercise_mobile/shift/shift_cubit.dart';
-import 'package:exercise_mobile/shift/shift_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -11,19 +12,20 @@ class ShiftsPage extends StatelessWidget {
   final void Function(Shift) tapShift;
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shifts'),
+        title: Text(l10n.shiftAppBarTitle),
       ),
       body: BlocProvider(
-        create: (BuildContext context) => ShiftsCubit(ShiftRepository()),
+        create: (BuildContext context) => ShiftCubit.autoFetch(),
         child: Builder(builder: _buildPage),
       ),
     );
   }
 
   Widget _buildPage(BuildContext context) {
-    return BlocBuilder<ShiftsCubit, ShiftsState>(
+    return BlocBuilder<ShiftCubit, ShiftsState>(
       builder: (context, state) {
         if (state is ShiftsLoading) {
           return const Center(
@@ -79,7 +81,7 @@ class ShiftsPage extends StatelessWidget {
           );
         }
         return const Center(
-          child: Text('please check your internet connection'),
+          child: Text("Couldn't fetch shifts. Is the device online?"),
         );
       },
     );
