@@ -8,20 +8,30 @@ environment:
 
 dependencies:
   bloc: ^8.0.1
+  cached_network_image: ^3.2.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.0
   flutter_localizations:
     sdk: flutter
+  http: ^0.13.4
   intl: ^0.17.0
-
+  json_annotation: ^4.3.0
+  timezone: ^0.8.0
 dev_dependencies:
   bloc_test: ^9.0.1
   flutter_test:
     sdk: flutter
   mocktail: ^0.2.0
   very_good_analysis: ^2.4.0
+  build_runner: ^2.1.5
+  json_serializable: ^6.0.1
+  flutter_gen_runner: ^4.1.2
+  
 
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/images/avatar_placeholder.png
+    - assets/images/us_dollar.png
